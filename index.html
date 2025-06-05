@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Slider Component</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body style="background: #F0F0F0; display:flex; justify-content: center; align-items: center; min-height: 100vh;">
+    <div class="luka-slider-container" x-data="initSlider()">
+        <div class="luka-slider-wrapper">
+            <template x-for="(slide, index) in slides" :key="index">
+                <div class="luka-slide" :style="{background: slide.background, color: slide.color}" :class="{'luka-slide-active': currentSlide === index}" x-transition>
+                    <div class="luka-slide-content">
+                        <img :src="slide.title" alt="" class="luka-slide-title">
+                        <p x-text="slide.desc" class="luka-slide-desc"></p>
+                        <ul class="luka-slide-features">
+                            <template x-for="(feature, i) in slide.features" :key="i">
+                                <li class="luka-slide-feature">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.17926 1.33413C7.32893 0.873476 7.98064 0.873475 8.13031 1.33413L9.56315 5.74396C9.63009 
+                                        5.94997 9.82207 6.08945 10.0387 6.08945H14.6755C15.1598 6.08945 15.3612 6.70926 14.9693 
+                                        6.99396L11.2181 9.71939C11.0429 9.84671 10.9695 10.0724 11.0365 10.2784L12.4693 14.6882C12.619 
+                                        15.1489 12.0918 15.532 11.6999 15.2472L7.94868 12.5218C7.77343 12.3945 7.53614 12.3945 7.36089 
+                                        12.5218L3.60967 15.2472C3.21781 15.5319 2.69057 15.1489 2.84025 14.6882L4.27309 10.2784C4.34002 
+                                        10.0724 4.26669 9.84671 4.09145 9.71939L0.340226 6.99396C-0.0516305 6.70926 0.149757 
+                                        6.08945 0.634119 6.08945H5.27089C5.4875 6.08945 5.67948 5.94997 5.74642 5.74396L7.17926 1.33413Z" 
+                                        fill="currentColor"/>
+                                    </svg>
+                                    <span x-text="feature"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                    <img :src="slide.image" alt="" width="350" class="luka-bg-image"/>
+                </div>
+            </template>
+        </div>
+        <div class="luka-slider-controls">
+            <button @click="prev" class="luka-slider-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+            </button>
+            <button @click="next" class="luka-slider-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <script>
+        function initSlider() {
+            return {
+                currentSlide: 0,
+                slides: [
+                    { 
+                        title: "title-0.png",
+                        desc: "Der erste Zahnarztbesuch ist ein großes Ereignis – wir machen ihn spielerisch und angstfrei. Unsere kinderfreundliche Praxis nimmt sich Zeit und erklärt alles auf Augenhöhe.",
+                        features: [
+                            "Einfühlsame Einführung in die Zahnwelt",
+                            "Spielerisches Lernen über Zahnpflege",
+                            "Eltern dürfen mit dabei sein"
+                        ],
+                        image: "./character-0.png",
+                        slug: "4-12 jahre alt",
+                        color: "hsla(323, 46%, 32%, 1)",
+                        background: "url(./slide-bg-0.png)",
+                    },
+                    {
+                        title: "title-1.png",
+                        desc: "Der erste Zahnarztbesuch ist ein großes Ereignis – wir machen ihn spielerisch und angstfrei. Unsere kinderfreundliche Praxis nimmt sich Zeit und erklärt alles auf Augenhöhe.",
+                        features: [
+                            "Kieferorthopädische Betreuung",
+                            "Beratung zu Weisheitszähnen",
+                            "Motivation zur eigenen Zahnpflege"
+                        ],
+                        image: "./character-1.png",
+                        slug: "13-19 jahre alt",
+                        color: "hsla(33, 41%, 34%, 1)",
+                        background: "url(./slide-bg-1.png)"
+
+                    },
+                    {
+                        title: "title-2.png",
+                        desc: "Vollgepackter Terminkalender? Wir bieten flexible, schnelle Termine – und Behandlungen, die auf Ihre Zeit abgestimmt sind.",
+                        features: [
+                            "Kurze Wartezeiten",
+                            "Online-Terminvereinbarung",
+                            "Früh- & Spättermine möglich"
+                        ],
+                        image: "./character-2.png",
+                        slug: "20-50 jahre alt",
+                        color: "hsla(212, 55%, 16%, 1)",
+                        background: "url(./slide-bg-2.png)"
+                    },
+                    {
+                        title: "title-3.png",
+                        desc: "Mit dem Alter verändern sich die Bedürfnisse – wir bieten angepasste Lösungen, z. B. Zahnersatz, Prophylaxe oder Schmerzfreiheit im Fokus.",
+                        features: [
+                            "Zahnersatz & Prothesenberatung",
+                            "Schonende Behandlungen",
+                            "Barrierefreier Zugang"
+                        ],
+                        image: "./character-3.png",
+                        slug: "50+ jahre alt",
+                        color: "hsla(100, 70%, 20%, 1)",
+                        background: "url(./slide-bg-3.png)"
+                    }
+                ],
+                next() {
+                    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                },
+                prev() {
+                    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                }
+            };
+        }
+    </script>
+</body>
+</html>
